@@ -5,8 +5,7 @@ const cartoDB = '<a href="http://cartodb.com/attributions">CartoDB</a>';
 
 const osmUrl = "http://tile.openstreetmap.org/{z}/{x}/{y}.png";
 const osmAttrib = `&copy; ${osmLink} Contributors`;
-const landUrl =
-  "https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png";
+const landUrl = "https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png";
 const cartoAttrib = `&copy; ${osmLink} Contributors & ${cartoDB}`;
 
 const osmMap = L.tileLayer(osmUrl, { attribution: osmAttrib });
@@ -81,7 +80,7 @@ for (let i = 0; i < points.length; i++) {
 // Add all markers to map
 map.addLayer(markers);
 
-var baseLayers = {
+let baseLayers = {
   "Klassika": osmMap,
   "Värvipime": landMap,
 };
