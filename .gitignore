@@ -5,3 +5,10 @@ backend/mvnw
 backend/mvnw.cmd
 backend/.mvn/wrapper/maven-wrapper.jar
 .DS_Store
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/jarRepositories.xml
+.idea/kaardirakendus.iml
+.idea/libraries/
+.idea/misc.xml
+.idea/modules.xml
