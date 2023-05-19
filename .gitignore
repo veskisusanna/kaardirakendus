@@ -1,9 +1,12 @@
 
+### Backend ###
 backend/.mvn/wrapper/maven-wrapper.properties
 backend/src/main/resources/application.properties
 backend/mvnw
 backend/mvnw.cmd
 backend/.mvn/wrapper/maven-wrapper.jar
+
+### .idea ###
 .DS_Store
 .idea/compiler.xml
 .idea/encodings.xml
@@ -14,3 +17,8 @@ backend/.mvn/wrapper/maven-wrapper.jar
 .idea/modules.xml
 .idea/dataSources.xml
 .idea/dataSources.xml
+
+### Configuration files ###
+/backend/src/main/resources/application.yml
+docker-compose.yml
+docker-compose.yml

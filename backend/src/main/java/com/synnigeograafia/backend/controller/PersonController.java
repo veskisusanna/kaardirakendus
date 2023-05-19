@@ -2,11 +2,12 @@ package com.synnigeograafia.backend.controller;
 
 import com.synnigeograafia.backend.domain.Person;
 import com.synnigeograafia.backend.service.PersonService;
-import org.bson.types.ObjectId;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -19,7 +20,7 @@ public class PersonController {
     }
 
     @GetMapping("/person")
-    public Person getPersonById(@RequestParam ObjectId id){
+    public Person getPersonById(@RequestParam UUID id){
         return this.personService.getPersonById(id);
     }
 }

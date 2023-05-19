@@ -1,6 +1,6 @@
 package com.synnigeograafia.backend.domain;
 
-import com.mongodb.lang.Nullable;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -8,46 +8,45 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.hibernate.annotations.Type;
 
-import java.io.Serializable;
+import java.util.UUID;
 
 @Entity
-@Document(collation = "avalikud_tegelased")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Person implements Serializable {
+public class Person {
 
-    @Id
-    @Column(name = "_id")
-    private ObjectId id;
+
     @Nullable
-    @Column(name = "Perekonnanimi")
+    @Column(name = "perekonnanimi")
     private String perekonnanimi;
     @Nullable
-    @Column(name = "Eesnimi")
+    @Column(name = "eesnimi")
     private String eesnimi;
     @Nullable
-    @Column(name = "Varjunimi")
-    private String varjunimi;
-    @Nullable
-    @Column(name = "Sünniaeg")
-    private String synniaeg;
-    @Nullable
-    @Column(name = "Sünnikoht")
-    private String synnikoht;
-    @Nullable
-    @Column(name = "Surmaaeg")
+    @Column(name = "surmaaeg")
     private String surmaaeg;
     @Nullable
-    @Column(name = "Valdkond")
+    @Column(name = "synniaeg")
+    private String synniaeg;
+    @Nullable
+    @Column(name = "kasvukoht")
+    private String kasvukoht;
+    @Nullable
+    @Column(name = "tunnus")
+    private String tunnus;
+    @Nullable
+    @Column(name = "valdkond")
     private String valdkond;
     @Nullable
-    @Column(name = "Tunnus")
-    private String tunnus;
-
+    @Column(name = "varjunimi")
+    private String varjunimi;
+    @Id //Will be changed to uuid
+    @Column(name = "id")
+//    @Type("uuid-char")
+    private UUID id;
 
 }
