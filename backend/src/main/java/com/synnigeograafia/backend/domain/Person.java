@@ -1,13 +1,12 @@
 package com.synnigeograafia.backend.domain;
 
 import jakarta.annotation.Nullable;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import java.util.UUID;
@@ -19,16 +18,20 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Person {
 
-
-    @Nullable
-    @Column(name = "perekonnanimi")
-    private String perekonnanimi;
+    @Id //Will be changed to uuid
+    @Column(name = "id", length = 36, columnDefinition = "varchar", updatable = false)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    private UUID id;
     @Nullable
     @Column(name = "eesnimi")
     private String eesnimi;
     @Nullable
-    @Column(name = "surmaaeg")
-    private String surmaaeg;
+    @Column(name = "perekonnanimi")
+    private String perekonnanimi;
+    @Nullable
+    @Column(name = "varjunimi")
+    private String varjunimi;
     @Nullable
     @Column(name = "synniaeg")
     private String synniaeg;
@@ -36,17 +39,13 @@ public class Person {
     @Column(name = "kasvukoht")
     private String kasvukoht;
     @Nullable
-    @Column(name = "tunnus")
-    private String tunnus;
+    @Column(name = "surmaaeg")
+    private String surmaaeg;
     @Nullable
     @Column(name = "valdkond")
     private String valdkond;
     @Nullable
-    @Column(name = "varjunimi")
-    private String varjunimi;
-    @Id //Will be changed to uuid
-    @Column(name = "id")
-//    @Type("uuid-char")
-    private UUID id;
+    @Column(name = "tunnus")
+    private String tunnus;
 
 }

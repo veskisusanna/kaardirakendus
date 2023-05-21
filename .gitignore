@@ -21,4 +21,10 @@ backend/.mvn/wrapper/maven-wrapper.jar
 ### Configuration files ###
 /backend/src/main/resources/application.yml
 docker-compose.yml
-docker-compose.yml
+backend/src/main/java/com/synnigeograafia/backend/repository/PersonJDBCDataAccessService.java
+
+### node modules ###
+node_modules
+package-lock.json
+package.json
+

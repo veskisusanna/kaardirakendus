@@ -1,4 +1,5 @@
-/* eslint-disable no-undef */
+// import axios from 'axios';
+// console.log(axios.isCancel('something'));
 
 const osmLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
 const cartoDB = '<a href="http://cartodb.com/attributions">CartoDB</a>';
@@ -82,7 +83,7 @@ map.addLayer(markers);
 
 let baseLayers = {
   "Klassika": osmMap,
-  "Värvipime": landMap,
+  "Dark mode": landMap,
 };
 
 L.control.layers(baseLayers).addTo(map);
@@ -99,7 +100,7 @@ let searchbox = L.control.searchbox({
 
 // Close and clear searchbox 600ms after pressing ENTER in the search box
 searchbox.onInput("keyup", function (e) {
-  if (e.keyCode == 13) {
+  if (e.keyCode === 13) {
     setTimeout(function () {
       searchbox.hide();
       searchbox.clear();
@@ -114,6 +115,41 @@ searchbox.onButton("click", function () {
     searchbox.clear();
   }, 600);
 });
+
+searchbox.onInput("keyup", function (e) {
+  let value = searchbox.getValue();
+  if (value !== "") {
+    const searchUrl = `http://localhost:8080/api/v1/search?name=${value}`;
+
+    fetch(searchUrl)
+        .then(response => response.json())
+        .then(data => {
+          const persons = data;
+
+          // Clear the existing dropdown options
+          searchbox.clearItems();
+
+          // Add the persons as dropdown options
+          persons.forEach(person => {
+            searchbox.addItem(person.eesnimi + " " + person.perekonnanimi);
+          });
+        })
+        .catch(error => {
+          console.error(error);
+        });
+  } else {
+    searchbox.clearItems();
+  }
+});
+
+
+
+
+
+
+
+
+
 
 // center the map when popup is clicked
 function clickZoom(e) {

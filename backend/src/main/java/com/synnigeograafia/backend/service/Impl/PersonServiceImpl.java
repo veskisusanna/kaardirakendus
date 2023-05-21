@@ -6,6 +6,7 @@ import com.synnigeograafia.backend.repository.PersonRepository;
 import com.synnigeograafia.backend.service.PersonService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -20,6 +21,12 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person getPersonById(UUID id) {
         return this.personRepository.findById(id)
-                .orElseThrow(() -> new PersonNotFoundException("Person with id " + id + " not found"));
+                .orElseThrow(() -> new PersonNotFoundException("Person with id '" + id + "' not found"));
     }
+
+    @Override
+    public List<Person> getAllPersons() {
+        return this.personRepository.findAll();
+    }
+
 }
