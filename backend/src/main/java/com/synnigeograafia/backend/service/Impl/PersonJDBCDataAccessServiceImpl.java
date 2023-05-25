@@ -1,7 +1,8 @@
 package com.synnigeograafia.backend.service.Impl;
 
 import com.synnigeograafia.backend.domain.Person;
-import com.synnigeograafia.backend.exception.PersonNotFoundException;
+import com.synnigeograafia.backend.mapper.PersonMapper;
+import com.synnigeograafia.backend.model.PersonDTO;
 import com.synnigeograafia.backend.repository.PersonJDBCDataAccessService;
 import com.synnigeograafia.backend.service.PersonDao;
 import org.springframework.stereotype.Service;
@@ -10,21 +11,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class PersonJDBCDataAccessServiceImpl implements PersonDao {
 
     private final PersonJDBCDataAccessService personJDBCDataAccessService;
+    private final PersonMapper personMapper;
 
-    public PersonJDBCDataAccessServiceImpl(PersonJDBCDataAccessService personJDBCDataAccessService) {
+    public PersonJDBCDataAccessServiceImpl(PersonJDBCDataAccessService personJDBCDataAccessService, PersonMapper personMapper) {
         this.personJDBCDataAccessService = personJDBCDataAccessService;
+        this.personMapper = personMapper;
     }
 
     @Override
     public Optional<Person> selectPersonById(UUID id) {
         // Use orElseThrow when mapping this to DTO
          return this.personJDBCDataAccessService.selectPersonById(id);
+//                 .map(personMapper::personToPersonDto);
     }
 
     @Override

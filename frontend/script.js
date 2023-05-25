@@ -54,7 +54,13 @@ let points = [
   [58.452044, 24.988403, "point 23"],
   [58.2882, 24.614182, "point 24"],
   [58.2882, 24.575043, "point 25"],
-  [58.290005, 24.622421, "Anton Hansen Tammsaare, sündinud 1848"],
+  [58.290005, 24.622421, "Eesnimi: Anton" + '<br>' +
+  "\nPerekonnanimi: Hansen"+ '<br>' +
+  "Varjunimi: Tammsaare"+ '<br>' +
+  "Sünniaeg: 30.01.1878"+ '<br>' +
+  "Kasvukoht: Albu vald Järvamaa"+ '<br>' +
+  "Valdkond: Kirjandus"+ '<br>' +
+  "Tunnus: Kirjanik"]
 ];
 
 // calling map
@@ -143,14 +149,6 @@ searchbox.onInput("keyup", function (e) {
 });
 
 
-
-
-
-
-
-
-
-
 // center the map when popup is clicked
 function clickZoom(e) {
   map.setView(e.target.getLatLng(), 15); //see siin os veits sus, vahest zoomib liiga sisse
@@ -216,3 +214,44 @@ function getCenterOfMap() {
 
 const compareToArrays = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
+
+// Temporary stuff
+// center the map when popup is clicked
+
+// let tammikas = {
+//   name: "Anton Hansen",
+//   coordinates: [58.290005, 24.622421],
+//   popupContent: "Eesnimi: Anton\n" +
+//       "\nPerekonnanimi: Hansen \n" +
+//       "Varjunimi: Tammsaare\n" +
+//       "Sünniaeg: 30.01.1878\n" +
+//       "Kasvukoht: Albu vald Järvamaa\n" +
+//       "Valdkond: Kirjandus\n" +
+//       "Tunnus: Kirjanik"
+// }
+//
+// function clickZoom(e) {
+//   const selectedPerson = e.target.getPopup().getContent();
+//
+//   // Find the corresponding person from the points array
+//   const person = tammikas.find(item => item.name === selectedPerson);
+//
+//   if (person) {
+//     const [lat, lng] = person.coordinates;
+//     map.setView([lat, lng], 15); // Center the map on the predefined coordinates with a zoom level of 15
+//   }
+// }
+
+// Create a new layer group for the KML data
+let kmlLayer = L.layerGroup();
+
+// Load the KML file using omnivore
+omnivore.kml('/Users/Diana/Downloads/Eesti avaliku elu tegelased 20. saj algul..kml')
+    .on('ready', function () {
+      // Add the KML features to the layer group
+      kmlLayer.addLayer(this);
+    })
+    .addTo(map);
+
+// Add the KML layer to the map
+kmlLayer.addTo(map);

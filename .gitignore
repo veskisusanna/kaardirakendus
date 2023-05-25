@@ -18,7 +18,7 @@ backend/.mvn/wrapper/maven-wrapper.jar
 .idea/dataSources.xml
 .idea/dataSources.xml
 
-### Configuration files ###
+### Configuration files/Database data ###
 /backend/src/main/resources/application.yml
 docker-compose.yml
 backend/src/main/java/com/synnigeograafia/backend/repository/PersonJDBCDataAccessService.java

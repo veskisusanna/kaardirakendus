@@ -1,4 +1,4 @@
-package com.synnigeograafia.backend.util;
+package com.synnigeograafia.backend.mapper;
 
 import com.synnigeograafia.backend.domain.Person;
 import org.springframework.jdbc.core.RowMapper;

@@ -1,7 +1,14 @@
 package com.synnigeograafia.backend.model;
 
+import lombok.*;
+
 import java.util.UUID;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 public class PersonDTO {
 
     private UUID id;

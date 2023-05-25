@@ -1,9 +1,11 @@
 package com.synnigeograafia.backend.controller;
 
 import com.synnigeograafia.backend.domain.Person;
+import com.synnigeograafia.backend.model.PersonDTO;
 import com.synnigeograafia.backend.service.PersonDao;
 import com.synnigeograafia.backend.service.PersonService;
 
+import com.synnigeograafia.backend.service.PersonServiceDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,20 +27,30 @@ public class PersonController {
     private final Logger logger = LoggerFactory.getLogger(PersonController.class);
     private final PersonService personService;
     private final PersonDao personDao;
+    private final PersonServiceDAO personServiceDAO;
 
     // The @Qualifier("jdbc") annotation is used to specify which implementation of the PersonDao interface should be used for injection.
-    public PersonController(PersonService personService, @Qualifier("jdbc") PersonDao personDao) {
+    public PersonController(PersonService personService, @Qualifier("jdbc") PersonDao personDao, PersonServiceDAO personServiceDAO) {
         this.personService = personService;
         this.personDao = personDao;
+        this.personServiceDAO = personServiceDAO;
     }
 
     @GetMapping("/allPersons")
     public ResponseEntity<List<Person>> getAllPersons(){
         return ResponseEntity.ok(this.personService.getAllPersons());
     }
+
+    //JPA
     @GetMapping("/allPersons2")
     public ResponseEntity<List<Person>> getAllPersons2(){
         return ResponseEntity.ok(this.personDao.selectAllPersons());
+    }
+
+    //DTO
+    @GetMapping("/DTOAllPersons")
+    public ResponseEntity<List<PersonDTO>> getAllPersons3(){
+        return ResponseEntity.ok(this.personServiceDAO.getAllPersons());
     }
 
 //    @GetMapping("/person")
@@ -64,5 +76,11 @@ public class PersonController {
     public ResponseEntity<List<String>> searchPersonByNameOnlyLikeCaseInsensitive(@RequestParam String name){
         logger.info("Received request to fetch person with name: {}", name);
         return ResponseEntity.ok(this.personDao.selectOnlyPersonNameLikeIgnoreCase(name));
+    }
+
+    @GetMapping("/personByJDBC")
+    public ResponseEntity<PersonDTO> JDBCPersonSearch(@RequestParam UUID personId){
+        logger.info("Received request to fetch person with ID: {}", personId);
+        return ResponseEntity.ok(this.personServiceDAO.getPersonById(personId));
     }
 }
