@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/kaardirakendus-vol2.iml" filepath="$PROJECT_DIR$/.idea/kaardirakendus-vol2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/backend.iml" filepath="$PROJECT_DIR$/backend/backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/kaardirakendus.iml" filepath="$PROJECT_DIR$/.idea/kaardirakendus.iml" />
     </modules>
   </component>
 </project>

@@ -1,4 +1,5 @@
-/* eslint-disable no-undef */
+// import axios from 'axios';
+// console.log(axios.isCancel('something'));
 
 const osmLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
 const cartoDB = '<a href="http://cartodb.com/attributions">CartoDB</a>';
@@ -53,7 +54,13 @@ let points = [
   [58.452044, 24.988403, "point 23"],
   [58.2882, 24.614182, "point 24"],
   [58.2882, 24.575043, "point 25"],
-  [58.290005, 24.622421, "point 26"],
+  [58.290005, 24.622421, "Eesnimi: Anton" + '<br>' +
+  "\nPerekonnanimi: Hansen"+ '<br>' +
+  "Varjunimi: Tammsaare"+ '<br>' +
+  "Sünniaeg: 30.01.1878"+ '<br>' +
+  "Kasvukoht: Albu vald Järvamaa"+ '<br>' +
+  "Valdkond: Kirjandus"+ '<br>' +
+  "Tunnus: Kirjanik"]
 ];
 
 // calling map
@@ -82,7 +89,7 @@ map.addLayer(markers);
 
 let baseLayers = {
   "Klassika": osmMap,
-  "Värvipime": landMap,
+  "Dark mode": landMap,
 };
 
 L.control.layers(baseLayers).addTo(map);
@@ -99,7 +106,7 @@ let searchbox = L.control.searchbox({
 
 // Close and clear searchbox 600ms after pressing ENTER in the search box
 searchbox.onInput("keyup", function (e) {
-  if (e.keyCode == 13) {
+  if (e.keyCode === 13) {
     setTimeout(function () {
       searchbox.hide();
       searchbox.clear();
@@ -114,6 +121,33 @@ searchbox.onButton("click", function () {
     searchbox.clear();
   }, 600);
 });
+
+searchbox.onInput("keyup", function (e) {
+  let value = searchbox.getValue();
+  if (value !== "") {
+    const searchUrl = `http://localhost:8080/api/v1/search?name=${value}`;
+
+    fetch(searchUrl)
+        .then(response => response.json())
+        .then(data => {
+          const persons = data;
+
+          // Clear the existing dropdown options
+          searchbox.clearItems();
+
+          // Add the persons as dropdown options
+          persons.forEach(person => {
+            searchbox.addItem(person.eesnimi + " " + person.perekonnanimi);
+          });
+        })
+        .catch(error => {
+          console.error(error);
+        });
+  } else {
+    searchbox.clearItems();
+  }
+});
+
 
 // center the map when popup is clicked
 function clickZoom(e) {
@@ -180,3 +214,44 @@ function getCenterOfMap() {
 
 const compareToArrays = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
+
+// Temporary stuff
+// center the map when popup is clicked
+
+// let tammikas = {
+//   name: "Anton Hansen",
+//   coordinates: [58.290005, 24.622421],
+//   popupContent: "Eesnimi: Anton\n" +
+//       "\nPerekonnanimi: Hansen \n" +
+//       "Varjunimi: Tammsaare\n" +
+//       "Sünniaeg: 30.01.1878\n" +
+//       "Kasvukoht: Albu vald Järvamaa\n" +
+//       "Valdkond: Kirjandus\n" +
+//       "Tunnus: Kirjanik"
+// }
+//
+// function clickZoom(e) {
+//   const selectedPerson = e.target.getPopup().getContent();
+//
+//   // Find the corresponding person from the points array
+//   const person = tammikas.find(item => item.name === selectedPerson);
+//
+//   if (person) {
+//     const [lat, lng] = person.coordinates;
+//     map.setView([lat, lng], 15); // Center the map on the predefined coordinates with a zoom level of 15
+//   }
+// }
+
+// Create a new layer group for the KML data
+let kmlLayer = L.layerGroup();
+
+// Load the KML file using omnivore
+omnivore.kml('/Users/Diana/Downloads/Eesti avaliku elu tegelased 20. saj algul..kml')
+    .on('ready', function () {
+      // Add the KML features to the layer group
+      kmlLayer.addLayer(this);
+    })
+    .addTo(map);
+
+// Add the KML layer to the map
+kmlLayer.addTo(map);
