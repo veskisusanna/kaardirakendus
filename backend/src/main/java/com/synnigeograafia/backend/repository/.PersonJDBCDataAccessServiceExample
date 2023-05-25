@@ -1,7 +1,7 @@
 package com.synnigeograafia.backend.repository;
 
 import com.synnigeograafia.backend.domain.Person;
-import com.synnigeograafia.backend.service.PersonDao;
+import com.synnigeograafia.backend.DAO.PersonDao;
 import com.synnigeograafia.backend.mapper.PersonRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

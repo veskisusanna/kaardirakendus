@@ -1,4 +1,4 @@
-package com.synnigeograafia.backend.service;
+package com.synnigeograafia.backend.repository.DAO;
 
 import com.synnigeograafia.backend.domain.Person;
 
@@ -11,5 +11,4 @@ public interface PersonDao {
     Optional<Person> selectPersonById(UUID id);
     List<Person> selectAllPersons();
     List<Person> selectPersonByNameLikeIgnoreCase(String name);
-    List<String> selectOnlyPersonNameLikeIgnoreCase(String name);
 }

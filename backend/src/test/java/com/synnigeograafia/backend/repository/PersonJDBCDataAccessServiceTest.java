@@ -1,7 +1,7 @@
 package com.synnigeograafia.backend.repository;
 
 import com.synnigeograafia.backend.domain.Person;
-import com.synnigeograafia.backend.service.PersonDao;
+import com.synnigeograafia.backend.repository.DAO.PersonDao;
 import com.synnigeograafia.backend.mapper.PersonRowMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
